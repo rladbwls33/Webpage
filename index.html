@@ -1,37 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Webpage </title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The artist — Intro</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:"Noto Sans KR",system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+      background-color:#09a6db;
+      color:#fff;
+      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    main{min-height:100vh;display:flex;flex-direction:column}
+
+    .hero{
+      min-height:72vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
+      padding-top:4.5rem;
+      position:relative;
+      text-align:center;
+    }
+
+    h1.title{
+      font-size:clamp(48px,10vw,120px);
+      font-weight:900;
+      letter-spacing:-2px;
+      margin:0;
+      line-height:0.95;
+    }
+
+    .statue-wrap{
+      position:relative;
+      width:360px;
+      max-width:40%;
+      margin-top:18px;
+      margin-bottom:-40px;
+      z-index:2;
+    }
+    .statue{width:100%;display:block;filter:drop-shadow(0 12px 18px rgba(0,0,0,0.15));}
+
+    /* bottom을 완전 중앙 정렬 + 선 삭제 */
+    .bottom{
+      background:#fff;
+      color:#111;
+      min-height:28vh;
+      padding:56px 6vw;
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:30px;
+      text-align:center;
+    }
+
+    /* decor-line 완전 삭제했음 */
+    
+    .menu-btn{
+      background:#cfefff;color:#fff;font-weight:900;font-size:32px;
+      padding:18px 48px;border-radius:6px;border:none;
+      cursor:pointer;box-shadow:12px 12px 0 rgba(0,0,0,0.18);
+      transition:transform .18s ease,box-shadow .18s ease;letter-spacing:.5px;
+    }
+    .menu-btn:hover{transform:translateY(-4px);box-shadow:16px 16px 0 rgba(0,0,0,0.22)}
+    .menu-btn:active{transform:translateY(2px)}
+
+    .hero::after{
+      content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:22vh;width:520px;height:90px;
+      background:radial-gradient(ellipse at center, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.04) 45%, transparent 70%);
+      filter:blur(10px);z-index:1;pointer-events:none;
+    }
+
+    .fade-in{opacity:0;transform:translateY(8px);transition:opacity .6s ease,transform .6s ease}
+    .fade-in.visible{opacity:1;transform:translateY(0)}
+  </style>
 </head>
 <body>
-    <h1>Html 이미지 예제</h1>
+  <main>
+    <section class="hero">
+      <h1 class="title fade-in" id="mainTitle">The artist</h1>
 
- JPEG 이미지 
-    <h2>1. JPEG 이미지 (사진)</h2>
-    <img scr="tulip.jpg" width="200" height="100" alt ="샘플 사진">
-    <p>JPEG 형식은 사진의 적합하며, 고화질을 상대적으로 작은 용량으로 표현할 수 있습니다.</p>
+      <div class="statue-wrap fade-in" id="statueWrap">
+        <img src="001.png" alt="조각상" class="statue">
+      </div>
+    </section>
 
-    PNG 이미지 
-    <h2>2. PNG 아미지 (로고 또는 아이콘)</h2>
-    <img src="D:\20251390-김유진\꽃.png" widtth ="200" height="100" alt ="투명 배경 로고">
-    <p>PNG 형식은 투명 배경이 가능헤 로고나 아이콘에 적합히디.</p>
+    <!-- 빨간선(Decor-line) 제거한 bottom -->
+    <section class="bottom fade-in" id="bottom">
+      <button class="menu-btn" id="menuBtn" aria-label="메뉴로 이동">Menu</button>
+    </section>
+  </main>
 
-    GIF 이미지
-    <h2>3. GIF 이미지 (움직이는 이미지)</h2>
-    <img src="animationg.gif" widtth ="200" height="100" alt ="GIT 애니메이션션">
-    <p>PNG 형식은 애니메이션 표현이 가능해 간단한 동작 이미지의 유용합나다.</p>
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      const elems = [document.getElementById('mainTitle'), document.getElementById('statueWrap'), document.getElementById('bottom')];
+      elems.forEach((el, i) => setTimeout(() => el.classList.add('visible'), 200 + i * 200));
 
+      document.getElementById('menuBtn').addEventListener('click', function () {
+  location.href = "menu.html";
+});
 
-
-    <!--<strong style = "border: 2px red,">Hello  </strong>
-    <em style = "border: 2px solid green,">Hello1  </em>
-     <em style = "border: 2px solid green,">Hello2  </em>
-     <em style = "border: 2px solid green,">Hello3  </em>
-     <em style = "border: 2px solid green,">Hello4  </em>
-     <ing src ="D:\20251390-김유진\가을.jpg" ait ="가을 이미지" title="가을 풍경"></ing>
-     <p style = "border: 2px solid red,">Hello3  </p>
-     <div style = "border: 2px solid red,">Hello4  </div>
-</html>
+    });
+  </script>
+  
 </body>
+</html>
